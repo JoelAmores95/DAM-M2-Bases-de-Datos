@@ -1,0 +1,9 @@
+http = hipertexT transfer protocol = normas para enviar texto (la url es texto, el html recibido del servidor es texto)
+el ordenador (CLiente hace una peticion a internet a traves de una aplicacion, google chrome)
+->
+nodos servidores rollo criptomonedas (Es para mi? no, paso al siguiente. es para mi? SI, me lo quedo (rutas de ip ^^))
+-> el servidor necesita un programa (APACHE) que busca en la carpeta htdocs la pagina en cuestion.
+Si es pag. estatica -> envia la pagina en html (REspuesta)
+Si es dinamica -> lenguaje php-> busca en base de datos (M2), genera pagina y envia resspuesta.
+
+Si se modifica una parte de la pagina, se usa javascript (lenguaje de cliente) (modificar codigo html desde chrome por ejemplo)

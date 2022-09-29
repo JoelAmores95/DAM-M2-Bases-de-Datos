@@ -1,0 +1,4 @@
+JAMORES -> employees
+JAMORES.PLSQL -> PLSQL employees
+JAMORES_COUNTRIES -> WF_Countries
+JAMORES.FASTFOOD -> fastFOOD

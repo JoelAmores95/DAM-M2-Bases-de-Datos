@@ -1,0 +1,48 @@
+Partimos del diseño ER (dibujo).
+
+Pasamos a modo escrito (Modelo relacional/tablas). - HOJA CALCULO EXCEL
+
+Las caracteristicas son:
+- Nombre UNICO -> Tabla ALUMNE
+- Cada fila (o registro) tiene los datos de un objeto -> DNI, Nom, Cognoms, Telefon(s)...
+- Cada columna (atributo o campo) debe ser único dentro de la tabla -> 39942286A, Joel, Amores Molero,...
+- Cada celda solo puede tener UN ÚNICO valor
+- DOMINIO -> alumnes(DNI domini character(9))
+
+
+
+----¿Cómo se hace?----
+
+1- Traducir las entidades
+	ALUMNES(_DNI_, Nom, Cognoms) -> ¡OJO! alumnes va en plural
+
+2-Traducir las relaciones
+
+- (1,N): [ALUMNE]3-[AULA]
+
+	ALUMNES(_DNI_,nom, Cognom1, cognom2, _numAula_) ON {numAula} REFERENCIA AULES 
+						->_numAula_ es la clave primaria de AULES, aqui se llama CLAU FORANA
+					    -----------
+	AULES(_numAula_, capacitat) -> 	Si surge la pregunta, ¿cuantos pongo? lo estoy haciendo al reves. 
+					Ponemos la clave primaria de la parte 1 de la relacion.
+
+- (1,1): [PROFESSOR]-[DEPARTAMENT] -> Se cambia el nombre de la clave forana, se vuelve mas explicativo
+
+	PROFESSORS(_DNI_, nom, cognoms, _codiDepartament_) ON {codiDepartament} REFERENCIA DEPARTAMENTS
+	DEPARTAMENTS(_Codi_, descripcio)
+
+- (N,N): [ALUMNE]3-E[ESPORT] - !* Se crea una tabla nueva que coge las claves primarias de las relaciones. 
+				NO puede ser clave primaria de esta tabla, la clave es LA COMBINACION DE AMBAS SIEMPRE
+	
+	alumnes(DNI,nom,cognoms)
+	esports(codi, descripcio)
+	!* alumnePracticaEsport(DNIAlumne, codiEsport, diaSemanal) ON {DNIAlumne} REFERENCIA alumnes
+							I {CodiEsports} REFERENCIA esports
+
+- Entidad débil: [CICLE]-o€[[MODUL]] la clave es la principal de la que dependen + la suya, TIENE 2
+	
+	CICLES(codi_, nom, descripcio)
+	MODULS(numeroModul_,nom, _codiCicle_) ON {codiCicle} REFERENCIA cicles
+
+- Entidad reflexiva
+

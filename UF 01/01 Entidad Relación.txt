@@ -1,0 +1,72 @@
+************************************En una Base de Datos Relacional (tipo CHEN)**************************************************
+
+------ENTIDADES-------
+
+- ENTIDAD en MAYÚSCULA y en un rectángulo, siempre en singular ^^.
+- atributos en minúscula y en círculos.
+
+Cada uno de los "clientes" es una ocurrencia
+
+# indica clave primaria
+* indica obligación de valor
+o indica que es opcional, puede ser NULL
+
+- Dominio: conjunto de valores que puede adoptar un atributo *con sus limitaciones* (ej. edad 0-120)
+- NULL: No tiene valor, o tiene valor NULL
+
+! Solo admite atributos simples, no compuestos (atributo: Apellidos -> Apellido 1 + Apellido 2) DEBE SER SEPARADO 
+Debido a la NORMALIZACION (serie de normas) no puede haber un atributo no dependiente de la clave primaria
+
+- Atributos monovaluats: solo un valor
+- Atributos multivaluats: mas de un valor, DOBLE circulo (Telefono movil y fijo)-> PROHIBIDO
+
+- Atributos calculados o derivados: Tengo la fecha de nacimiento, se puede saber la edad -> NO se usan, piden actualización constante y consumen tiempo.
+
+- Clau primaria: identificador único y mas simple y versátil, suele ser *numerico*. PUEDE SER COMPUESTA, pero DEBE tener valor, NO PUEDE SER NULL. __Subrallado__
+	el resto de posibles claves se llaman candidates
+
+- Instancia: Cada valor de "ALUMNO, PROFE..."
+
+
+_________RELACIONES____________
+
+Conexion entre dos entidades (En CHEN es un ROMBO <relacion>)
+
+ej: ALUMNE----<Matricula>---ASSIGNATURA
+	PROFE--<tutor>---ALUMNE
+
+relacion Grado 2 o binaria: Une dos ENTIDADES
+	 Grado 3 o ternaria: Une tres ENTIDADES ej: PROFE---<>---ALUMNE
+							    |
+							   AULA
+
+Conectividad: 	(1,1) []-[] (Modelo pata de cuervo/Crow's foot) []1-1[] equivale a (1,1)
+		(1,N) []-€[]					[]1-<>-N[]
+		(N,N) []3-€[]					[]N-<>-N[]
+
+Opcionalidad se indica con "o" (Un profe puede no ser tutor de un alumno [PROFE]-o€[ALUMNO]
+
+Para saber la conectividad se plantea asi: 
+
+	[PROFE]-[ALUMNO]: Un profe puede tener varios alumnos?. La respuesta va en ALUMNO. ¿Puede no tener ninguno?
+			  Un alumno puede tener varios profes?. La respuesta va en PROFE   ¿Puede no tener ninguno?
+
+Relación reflexiva: relacion consigo misma, ejemplo trabajador y encargado (que tambien es trabajador)
+	*Se recomienda hacerlo en paralelo para verlo más claro: []-[]
+	[MODULO]3o-OE[PREREQUISITO MODULO]
+
+	[PIEZA]3o-oE[PIEZA(componente)]
+		 |
+		cantidad
+
+atributo de relacion (Suele ir en (N,N)): [ALUMNO]-<>-[ASIGNATURA] ¿Donde va la nota? Sería algo asi: [ALUMNO]N-<hace>-N[ASIGNATURA]
+														  |
+														 nota
+- Implicitas: Relacionadas directamente con una ralla
+- Explicitas: Relacionadas a traves de varias entidades (ir saltando de una a otra, conjunto de implicitas)
+
+- Entidad debil: no se puede identificar por si misma, depende de otra entidad (entidad fuerte) 
+
+	[INSTITUTO]-[[AULA]] * es el aula 108 del instituto baix camp
+	[EDIFICIO]-[[APARTAMENTO]]
+	[CICLO]-[[MODULO]] * M1 de DAM
